@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'hook';
+import { fetchStoryIds } from 'store/storyIdsSlice';
 
 function App() {
-  return <h1>Hacker-news</h1>;
+  const storyIdsState = useAppSelector((state) => state.storyIds);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchStoryIds());
+  }, [dispatch]);
+
+  return (
+    <>
+      {storyIdsState.storyIds.map((value, i) => {
+        return <p key={i}>{value}</p>;
+      })}
+    </>
+  );
 }
 
 export default App;
