@@ -7,9 +7,21 @@ export const storyURL = `${baseURL}item/`;
 export const getStoryIds = async () => {
   const result = await axios
     .get(newStoriesURL)
-    .then((data) => data.data)
+    .then(({ data }) => data)
     .catch(() => {
       throw new Error('Server error');
     });
+
+  return result;
+};
+
+export const getStory = async (storyId: number) => {
+  const result = await axios
+    .get(`${storyURL + storyId}.json`)
+    .then(({ data }) => data)
+    .catch(() => {
+      throw new Error('Server error');
+    });
+
   return result;
 };

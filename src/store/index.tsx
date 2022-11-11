@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import storyIdsReducer from './storyIdsSlice';
+import storiesReducer from './storySlice';
 
 const store = configureStore({
   reducer: {
     storyIds: storyIdsReducer,
+    stories: storiesReducer,
   },
 });
 

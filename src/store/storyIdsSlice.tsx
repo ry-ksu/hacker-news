@@ -34,6 +34,8 @@ const storyIdsSlice = createSlice({
       .addCase(fetchStoryIds.fulfilled, (state, action) => {
         state.isLoaded = 'LOADED';
         state.storyIds = action.payload;
+        const endValue = 100;
+        state.storyIds = state.storyIds.slice(0, endValue);
       })
       .addCase(fetchStoryIds.rejected, (state) => {
         state.isLoaded = 'REJECTED';
