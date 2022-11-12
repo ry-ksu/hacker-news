@@ -5,17 +5,29 @@ import { StoriesPage } from '../../pages/StoriesPage';
 import { StoryPage } from '../../pages/StoryPage';
 import { Layout } from '../../layout';
 
+import { axiosController, restartAxiosController } from 'services/hnAPI';
 import { useAppDispatch, useAppSelector } from 'hook';
-import { fetchStory } from 'store/storySlice';
+import { fetchStory, removeStories } from 'store/storySlice';
 import { fetchStoryIds } from 'store/storyIdsSlice';
 
 function App() {
   const storyIdsState = useAppSelector((state) => state.storyIds);
   const dispatch = useAppDispatch();
 
+  const updateStories = () => {
+    axiosController.abort();
+    restartAxiosController();
+    dispatch(removeStories());
+    dispatch(fetchStoryIds());
+  };
+
   useEffect(() => {
     dispatch(fetchStoryIds());
     console.log(555);
+
+    setInterval(() => {
+      updateStories();
+    }, 10000);
   }, [dispatch]);
 
   useEffect(() => {
@@ -25,11 +37,15 @@ function App() {
     }
   }, [dispatch, storyIdsState.storyIds]);
 
+  const wrappedStoriesPage = () => {
+    return <StoriesPage onClickBtn={updateStories} />;
+  };
+
   return (
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path="/" component={StoriesPage} />
+          <Route exact path="/" component={wrappedStoriesPage} />
           <Route path="/story" component={StoryPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>

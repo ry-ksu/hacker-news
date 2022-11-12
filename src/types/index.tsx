@@ -18,4 +18,5 @@ export type IStory = {
 
 export type IStoriesState = {
   stories: IStory[];
+  isLoading: string;
 };

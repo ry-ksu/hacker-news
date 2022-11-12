@@ -6,10 +6,10 @@ export const Header = () => {
     <header>
       <ul>
         <li>
-          <Link to="/">Новости</Link>
+          <Link to="/">Главная страница</Link>
         </li>
         <li>
-          <Link to="story">Подробнее о новости</Link>
+          <Link to="story">Страница новости</Link>
         </li>
       </ul>
     </header>
