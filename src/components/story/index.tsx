@@ -12,7 +12,7 @@ export const Story = (prop: IStoryProp) => {
       <h3>{prop.story.title}</h3>
       <p>{prop.story.score}</p>
       <p>{prop.story.by}</p>
-      <p>{prop.story.time}</p>
+      <p>{String(new Date(prop.story.time * 1000))}</p>
     </div>
   ) : null;
 };

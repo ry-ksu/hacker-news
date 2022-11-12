@@ -7,11 +7,12 @@ import { Layout } from '../../layout';
 
 import { axiosController, restartAxiosController } from 'services/hnAPI';
 import { useAppDispatch, useAppSelector } from 'hook';
-import { fetchStory, removeStories } from 'store/storySlice';
+import { fetchStory, removeStories, sortStories, changeLoading } from 'store/storySlice';
 import { fetchStoryIds } from 'store/storyIdsSlice';
 
 function App() {
   const storyIdsState = useAppSelector((state) => state.storyIds);
+  // const storiesState = useAppSelector((state) => state.stories);
   const dispatch = useAppDispatch();
 
   const updateStories = () => {
@@ -27,14 +28,19 @@ function App() {
 
     setInterval(() => {
       updateStories();
-    }, 10000);
+    }, 60000);
   }, [dispatch]);
 
   useEffect(() => {
-    for (let i = 0; i < storyIdsState.storyIds.length; i++) {
-      dispatch(fetchStory(storyIdsState.storyIds[i]));
-      console.log(999);
-    }
+    (async (array: Array<number>) => {
+      const promises = array.map((elem) => {
+        dispatch(fetchStory(elem));
+      });
+      await Promise.all(promises)
+        .then(() => dispatch(sortStories()))
+        .then(() => dispatch(changeLoading('LOADED')));
+      console.log('done');
+    })(storyIdsState.storyIds);
   }, [dispatch, storyIdsState.storyIds]);
 
   const wrappedStoriesPage = () => {

@@ -26,6 +26,12 @@ const storySlice = createSlice({
     removeStories(state) {
       state.stories = [];
     },
+    sortStories(state) {
+      state.stories.sort((a, b) => b.time - a.time);
+    },
+    changeLoading(state, action) {
+      state.isLoading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -37,5 +43,5 @@ const storySlice = createSlice({
   },
 });
 
-export const { removeStories } = storySlice.actions;
+export const { removeStories, sortStories, changeLoading } = storySlice.actions;
 export default storySlice.reducer;
