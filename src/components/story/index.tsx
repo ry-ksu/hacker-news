@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { getStory } from '../../services/hnAPI';
+import React from 'react';
 import { IStory } from 'types';
 
 type IStoryProp = {
-  storyId: number;
+  story: IStory;
 };
 
 export const Story = (prop: IStoryProp) => {
-  const [story, setStory] = useState<IStory | Record<string, never>>({});
-
-  useEffect(() => {
-    getStory(prop.storyId).then((data) => data && data.url && setStory(data));
-  }, [prop.storyId]);
-
   console.log(1);
-  return story && story.url ? (
+  return prop.story && prop.story.url ? (
     <>
-      <h3>{story.title}</h3>
-      <p>{story.score}</p>
-      <p>{story.by}</p>
-      <p>{story.time}</p>
+      <h3>{prop.story.title}</h3>
+      <p>{prop.story.score}</p>
+      <p>{prop.story.by}</p>
+      <p>{prop.story.time}</p>
     </>
   ) : null;
 };

@@ -1,20 +1,14 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'hook';
-import { fetchStoryIds } from 'store/storyIdsSlice';
+import React from 'react';
+import { useAppSelector } from 'hook';
 import { Story } from 'components/story';
 
 export const StoriesContainer = () => {
-  const storyIdsState = useAppSelector((state) => state.storyIds);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchStoryIds());
-  }, [dispatch]);
+  const stories = useAppSelector((state) => state.stories.stories);
 
   return (
     <>
-      {storyIdsState.storyIds.map((storyId) => {
-        return <Story key={storyId} storyId={storyId} />;
+      {stories.map((story) => {
+        return <Story key={story.id} story={story} />;
       })}
     </>
   );
