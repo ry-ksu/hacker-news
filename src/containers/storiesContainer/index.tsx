@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'hook';
 import { fetchStoryIds } from 'store/storyIdsSlice';
-import { Story } from 'components/story.tsx';
+import { Story } from 'components/story';
 
 export const StoriesContainer = () => {
   const storyIdsState = useAppSelector((state) => state.storyIds);
