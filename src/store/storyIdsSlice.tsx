@@ -23,7 +23,11 @@ const storyIdsInitialState: IStoryIdsState = {
 const storyIdsSlice = createSlice({
   name: 'storyIds',
   initialState: storyIdsInitialState,
-  reducers: {},
+  reducers: {
+    removeStoryIds(state) {
+      state.storyIds = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchStoryIds.pending, (state) => {
@@ -45,3 +49,4 @@ const storyIdsSlice = createSlice({
 });
 
 export default storyIdsSlice.reducer;
+export const { removeStoryIds } = storyIdsSlice.actions;

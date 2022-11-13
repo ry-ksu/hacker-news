@@ -22,3 +22,19 @@ export type IStoriesState = {
   error: string;
   chosenStory: IStory | null;
 };
+
+export type IComment = {
+  by: string;
+  id: number;
+  kids: Array<number>;
+  parent: number;
+  text: string;
+  time: number;
+  type: string;
+};
+
+export type ICommentState = {
+  comments: IComment[];
+  isLoaded: string;
+  error: string;
+};

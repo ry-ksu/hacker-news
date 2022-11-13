@@ -4,7 +4,7 @@ import { Button } from 'components/button';
 
 import { axiosController, restartAxiosController } from 'services/hnAPI';
 import { useAppDispatch, useAppSelector } from 'hook';
-import { fetchStoryIds } from 'store/storyIdsSlice';
+import { fetchStoryIds, removeStoryIds } from 'store/storyIdsSlice';
 import { fetchStories } from '../store/storiesSlice';
 
 export const StoriesPage = () => {
@@ -28,6 +28,7 @@ export const StoriesPage = () => {
     }, 60000);
 
     return () => {
+      dispatch(removeStoryIds());
       clearInterval(interval);
       axiosController.abort();
       restartAxiosController();

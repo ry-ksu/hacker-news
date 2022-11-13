@@ -1,23 +1,47 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAppSelector } from 'hook';
+import { fetchComments, removeComments } from 'store/storyCommentsSlice';
+import { useAppDispatch, useAppSelector } from 'hook';
+import { axiosController, restartAxiosController } from 'services/hnAPI';
+import { Button } from 'components/button';
+import { ChosenStory } from 'components/chosenStory';
 
 export const StoryPage = () => {
   const chosenStory = useAppSelector((state) => state.stories.chosenStory);
+  const dispatch = useAppDispatch();
+
+  const btnContent = 'Обновить комментарии';
+  const navLinkContent = 'К главной странице';
+
+  const updateComments = useCallback(() => {
+    if (chosenStory && chosenStory.kids) {
+      axiosController.abort();
+      restartAxiosController();
+      dispatch(removeComments());
+      dispatch(fetchComments(chosenStory.kids));
+    }
+  }, [chosenStory, dispatch]);
+
+  useEffect(() => {
+    if (chosenStory && chosenStory.kids) {
+      dispatch(fetchComments(chosenStory.kids));
+    }
+
+    return () => {
+      dispatch(removeComments());
+      axiosController.abort();
+      restartAxiosController();
+    };
+  }, [chosenStory, dispatch]);
 
   return (
-    chosenStory && (
-      <div>
-        <h3>{chosenStory.title}</h3>
-        <NavLink to={chosenStory.url}>{chosenStory.url}</NavLink>
-        <p>{String(new Date(chosenStory.time * 1000))}</p>
-        <p>{chosenStory.by}</p>
-        <p>Комментарии: {chosenStory.kids?.length || 0}</p>
-        {chosenStory.kids &&
-          chosenStory.kids?.map((comment) => {
-            return <p key={comment}>{comment}</p>;
-          })}
-      </div>
-    )
+    <>
+      <NavLink to="/">
+        <Button content={navLinkContent} onClick={() => {}} />
+      </NavLink>
+      <h1>Выбранная новость</h1>
+      <Button content={btnContent} onClick={updateComments} />
+      {chosenStory && <ChosenStory />}
+    </>
   );
 };

@@ -26,6 +26,9 @@ export const Story = (prop: IStoryProp) => {
         <p>{prop.story.score}</p>
         <p>{prop.story.by}</p>
         <p>{String(new Date(prop.story.time * 1000))}</p>
+        <p>
+          <strong>{prop.story.kids?.length}</strong>
+        </p>
       </div>
     </NavLink>
   ) : null;
