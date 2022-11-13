@@ -18,5 +18,6 @@ export type IStory = {
 
 export type IStoriesState = {
   stories: IStory[];
-  isLoading: string;
+  isLoaded: string;
+  error: string;
 };
