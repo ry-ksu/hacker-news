@@ -1,16 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const Header = () => {
+  const links = [
+    {
+      path: '/',
+      label: 'Главная страница',
+      exact: true,
+    },
+    {
+      path: '/story',
+      label: 'Страница новости',
+      exact: false,
+    },
+  ];
+
   return (
     <header>
       <ul>
-        <li>
-          <Link to="/">Главная страница</Link>
-        </li>
-        <li>
-          <Link to="story">Страница новости</Link>
-        </li>
+        {links.map(({ path, label, exact }) => (
+          <li key={label}>
+            <NavLink to={path} exact={exact}>
+              {label}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </header>
   );

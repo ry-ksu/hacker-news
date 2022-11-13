@@ -25,7 +25,7 @@ export const StoriesPage = () => {
 
     const interval = setInterval(() => {
       updateStories();
-    }, 10000);
+    }, 60000);
 
     return () => {
       clearInterval(interval);
