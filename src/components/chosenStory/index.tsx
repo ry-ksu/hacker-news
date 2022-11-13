@@ -18,7 +18,9 @@ export const ChosenStory = () => {
           <p>Комментарии: {chosenStory.kids?.length || 0}</p>
         </div>
       )}
-      {chosenStory && chosenStory.kids && comments.isLoaded === 'LOADED' && <CommentsContainer />}
+      {chosenStory && chosenStory.kids && comments.isLoaded === 'LOADED' && (
+        <CommentsContainer parentId={chosenStory.id} />
+      )}
     </>
   );
 };
