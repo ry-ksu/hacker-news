@@ -20,16 +20,16 @@ export const Story = (prop: IStoryProp) => {
   };
 
   return prop.story && prop.story.url ? (
-    <NavLink to="/story">
-      <div data-id={prop.story.id} onClick={onClick}>
-        <h3>{prop.story.title}</h3>
-        <p>{prop.story.score}</p>
-        <p>{prop.story.by}</p>
-        <p>{String(new Date(prop.story.time * 1000))}</p>
-        <p>
+    <div data-id={prop.story.id} onClick={onClick}>
+      <NavLink to="/story">
+        <span>{prop.story.title}</span>
+        <span>{prop.story.score}</span>
+        <span>{prop.story.by}</span>
+        <span>{String(new Date(prop.story.time * 1000))}</span>
+        <span>
           <strong>{prop.story.kids?.length}</strong>
-        </p>
-      </div>
-    </NavLink>
+        </span>
+      </NavLink>
+    </div>
   ) : null;
 };
