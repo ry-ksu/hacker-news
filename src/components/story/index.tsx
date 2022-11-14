@@ -6,6 +6,7 @@ import { IStory } from 'types';
 import { Card, CardContent, Typography, Badge } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ForumIcon from '@mui/icons-material/Forum';
+import { dateMapping } from 'mapping/dateMapping';
 
 import style from './style.module.css';
 
@@ -16,11 +17,6 @@ type IStoryProp = {
 export const Story = (prop: IStoryProp) => {
   const dispatch = useAppDispatch();
   const stories = useAppSelector((state) => state.stories.stories);
-
-  const date = (date: number) => {
-    const result = new Date(date * 1000).toString();
-    return result.slice(0, 24);
-  };
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const storyIndex = Number(e.currentTarget.dataset.id);
@@ -41,13 +37,13 @@ export const Story = (prop: IStoryProp) => {
 
               <div className={style['card-content_by']}>
                 <Typography color="text.secondary" component="span" gutterBottom>
-                  <strong>By: </strong> {prop.story.by}
+                  <strong>Автор: </strong> {prop.story.by}
                 </Typography>
               </div>
 
               <div className={style['card-content_posted']}>
                 <Typography color="text.secondary" component="span" gutterBottom>
-                  <strong>Posted: </strong> {date(prop.story.time)}
+                  <strong>Дата публикации: </strong> {dateMapping(prop.story.time)}
                 </Typography>
               </div>
 

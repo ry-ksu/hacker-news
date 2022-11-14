@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from 'hook';
 import { fetchStoryIds, removeStoryIds } from 'store/storyIdsSlice';
 import { fetchStories } from '../store/storiesSlice';
 
-import style from './storiesPageStyle.module.css';
+import style from './style.module.css';
 
 export const StoriesPage = () => {
   const storiesState = useAppSelector((state) => state.stories);
@@ -47,12 +47,14 @@ export const StoriesPage = () => {
   }, [dispatch, storyIdsState.storyIds]);
 
   return (
-    <div className={style['stories-page-container']}>
+    <div className={style['page-container']}>
       <Container>
         <Typography variant="h2" gutterBottom>
           Hacker News
         </Typography>
+
         <Btn variant="outlined" content={btnContent} onClick={updateStories} />
+
         {storiesState.isLoaded === 'LOADED' && <StoriesContainer />}
       </Container>
     </div>

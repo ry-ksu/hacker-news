@@ -7,6 +7,8 @@ import { Btn } from 'components/button';
 import { ChosenStory } from 'components/chosenStory';
 import { Typography, Container } from '@mui/material';
 
+import style from './style.module.css';
+
 export const StoryPage = () => {
   const chosenStory = useAppSelector((state) => state.stories.chosenStory);
   const dispatch = useAppDispatch();
@@ -36,15 +38,22 @@ export const StoryPage = () => {
   }, [chosenStory, dispatch]);
 
   return (
-    <Container>
-      <Typography variant="h2" gutterBottom>
-        Страница новости
-      </Typography>
-      <NavLink to="/">
-        <Btn variant="outlined" content={navLinkContent} onClick={() => {}} />
-      </NavLink>
-      <Btn variant="text" content={btnContent} onClick={updateComments} />
-      {chosenStory && <ChosenStory />}
-    </Container>
+    <div className={style['page-container']}>
+      <Container>
+        <Typography variant="h2" gutterBottom>
+          Страница новости
+        </Typography>
+
+        <div className={style['story-page_buttons']}>
+          <NavLink to="/">
+            <Btn variant="outlined" content={navLinkContent} onClick={() => {}} />
+          </NavLink>
+
+          <Btn variant="text" content={btnContent} onClick={updateComments} />
+        </div>
+
+        {chosenStory && <ChosenStory />}
+      </Container>
+    </div>
   );
 };

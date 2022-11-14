@@ -1,0 +1,13 @@
+.comment {
+  border-left: 1px solid #1976d2;
+  padding-left: 20px;
+}
+
+.comment__answer-wrapper {
+  margin: 3px 0 0 5px;
+}
+
+.comment__answer {
+  color: #1976d2;
+  font-size: 12px;
+}
