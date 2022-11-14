@@ -7,6 +7,8 @@ import { Card, CardContent, Typography, Badge } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ForumIcon from '@mui/icons-material/Forum';
 
+import style from './style.module.css';
+
 type IStoryProp = {
   story: IStory;
 };
@@ -28,44 +30,46 @@ export const Story = (prop: IStoryProp) => {
   };
 
   return prop.story && prop.story.url ? (
-    <Card data-id={prop.story.id} onClick={onClick} sx={{ mb: 2 }}>
-      <NavLink to="/story">
-        <CardContent sx={{ position: 'relative' }}>
-          <Typography variant="h5" sx={{ color: 'rgba(0, 0, 0, 0.87)' }}>
-            {prop.story.title}
-          </Typography>
+    <div className={style.card}>
+      <Card data-id={prop.story.id} onClick={onClick}>
+        <NavLink to="/story">
+          <div className={style['card-content']}>
+            <CardContent>
+              <Typography variant="h5" color="text.primary">
+                {prop.story.title}
+              </Typography>
 
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" component="span" gutterBottom>
-            <strong>By: </strong> {prop.story.by}
-          </Typography>
+              <div className={style['card-content_by']}>
+                <Typography color="text.secondary" component="span" gutterBottom>
+                  <strong>By: </strong> {prop.story.by}
+                </Typography>
+              </div>
 
-          <Typography
-            sx={{ fontSize: 14 }}
-            color="text.secondary"
-            component="span"
-            gutterBottom
-            ml={1}
-          >
-            <strong>Posted: </strong> {date(prop.story.time)}
-          </Typography>
+              <div className={style['card-content_posted']}>
+                <Typography color="text.secondary" component="span" gutterBottom>
+                  <strong>Posted: </strong> {date(prop.story.time)}
+                </Typography>
+              </div>
 
-          <Badge
-            badgeContent={prop.story.score}
-            color="primary"
-            sx={{ position: 'absolute', right: '70px', bottom: '40px' }}
-          >
-            <ThumbUpIcon color="action" sx={{ position: 'absolute', top: '3px', right: '3px' }} />
-          </Badge>
+              <div className={style['badge_rating']}>
+                <Badge badgeContent={prop.story.score} color="primary">
+                  <div className={style.icon}>
+                    <ThumbUpIcon color="action" />
+                  </div>
+                </Badge>
+              </div>
 
-          <Badge
-            badgeContent={prop.story.kids?.length}
-            color="primary"
-            sx={{ position: 'absolute', right: '30px', bottom: '16px' }}
-          >
-            <ForumIcon color="action" sx={{ position: 'relative', top: '3px', right: '3px' }} />
-          </Badge>
-        </CardContent>
-      </NavLink>
-    </Card>
+              <div className={style['badge_comment']}>
+                <Badge badgeContent={prop.story.kids?.length} color="primary">
+                  <div className={style.icon}>
+                    <ForumIcon color="action" />
+                  </div>
+                </Badge>
+              </div>
+            </CardContent>
+          </div>
+        </NavLink>
+      </Card>
+    </div>
   ) : null;
 };

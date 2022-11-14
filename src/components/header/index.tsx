@@ -56,6 +56,7 @@ export const Header = () => {
       </List>
     </Box>
   );
+
   const drawerWidth = 240;
 
   return (
