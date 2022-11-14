@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { StoriesContainer } from 'containers/storiesContainer';
-import { Button } from 'components/button';
+import { Btn } from 'components/button';
+import { Container, Typography } from '@mui/material';
 
 import { axiosController, restartAxiosController } from 'services/hnAPI';
 import { useAppDispatch, useAppSelector } from 'hook';
@@ -44,10 +45,12 @@ export const StoriesPage = () => {
   }, [dispatch, storyIdsState.storyIds]);
 
   return (
-    <>
-      <h1>Hacker News</h1>
-      <Button content={btnContent} onClick={updateStories} />
+    <Container sx={{ mt: 3 }}>
+      <Typography variant="h2" gutterBottom>
+        Hacker News
+      </Typography>
+      <Btn variant="outlined" content={btnContent} onClick={updateStories} />
       {storiesState.isLoaded === 'LOADED' && <StoriesContainer />}
-    </>
+    </Container>
   );
 };

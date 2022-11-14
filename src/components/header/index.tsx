@@ -13,6 +13,7 @@ import {
   ListItemText,
   Button,
   Drawer,
+  Container,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -60,31 +61,33 @@ export const Header = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            Hacker News
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {links.map(({ path, label, exact }) => (
-              <NavLink key={label} to={path} exact={exact}>
-                <Button sx={{ color: '#fff' }}>{label}</Button>
-              </NavLink>
-            ))}
-          </Box>
-        </Toolbar>
+        <Container>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              Hacker News
+            </Typography>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+              {links.map(({ path, label, exact }) => (
+                <NavLink key={label} to={path} exact={exact}>
+                  <Button sx={{ color: '#fff' }}>{label}</Button>
+                </NavLink>
+              ))}
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
       <Box component="nav">
         <Drawer

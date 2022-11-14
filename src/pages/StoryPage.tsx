@@ -3,8 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { fetchComments, removeComments } from 'store/storyCommentsSlice';
 import { useAppDispatch, useAppSelector } from 'hook';
 import { axiosController, restartAxiosController } from 'services/hnAPI';
-import { Button } from 'components/button';
+import { Btn } from 'components/button';
 import { ChosenStory } from 'components/chosenStory';
+import { Typography, Container } from '@mui/material';
 
 export const StoryPage = () => {
   const chosenStory = useAppSelector((state) => state.stories.chosenStory);
@@ -35,13 +36,15 @@ export const StoryPage = () => {
   }, [chosenStory, dispatch]);
 
   return (
-    <>
+    <Container>
+      <Typography variant="h2" gutterBottom>
+        Страница новости
+      </Typography>
       <NavLink to="/">
-        <Button content={navLinkContent} onClick={() => {}} />
+        <Btn variant="outlined" content={navLinkContent} onClick={() => {}} />
       </NavLink>
-      <h1>Выбранная новость</h1>
-      <Button content={btnContent} onClick={updateComments} />
+      <Btn variant="text" content={btnContent} onClick={updateComments} />
       {chosenStory && <ChosenStory />}
-    </>
+    </Container>
   );
 };
