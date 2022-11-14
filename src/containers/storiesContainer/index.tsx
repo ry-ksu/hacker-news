@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector } from 'hook';
 import { Story } from 'components/story';
-import { Container, Grid } from '@mui/material';
+import { Container } from '@mui/material';
 
 export const StoriesContainer = () => {
   const stories = useAppSelector((state) => state.stories.stories);

@@ -74,10 +74,11 @@ const storiesSlice = createSlice({
         state.error = '';
       })
       .addCase(fetchStories.fulfilled, (state, action) => {
-        state.isLoaded = 'LOADED';
         state.stories = action.payload;
-        console.log('end fetch', action.payload);
+        state.stories.filter((elem) => elem != null);
+        console.log('end fetch', state.stories);
         state.stories.sort((a, b) => b.time - a.time);
+        state.isLoaded = 'LOADED';
       })
       .addCase(fetchStories.rejected, (state) => {
         state.isLoaded = 'REJECTED';
