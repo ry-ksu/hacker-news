@@ -8,6 +8,7 @@ import { ChosenStory } from 'components/chosenStory';
 import { Typography, Container } from '@mui/material';
 
 import style from './style.module.css';
+import { Warning } from 'components/warning';
 
 export const StoryPage = () => {
   const chosenStory = useAppSelector((state) => state.stories.chosenStory);
@@ -37,6 +38,12 @@ export const StoryPage = () => {
     };
   }, [chosenStory, dispatch]);
 
+  let content = <Warning warning="Пожалуйста, перейдите на Главную страницу и выберете новость." />;
+
+  if (chosenStory) {
+    content = <ChosenStory />;
+  }
+
   return (
     <div className={style['page-container']}>
       <Container>
@@ -52,7 +59,7 @@ export const StoryPage = () => {
           <Btn variant="text" content={btnContent} onClick={updateComments} />
         </div>
 
-        {chosenStory && <ChosenStory />}
+        {content}
       </Container>
     </div>
   );

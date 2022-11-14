@@ -5,10 +5,19 @@ import { Card, CardContent, Typography, Container } from '@mui/material';
 import { dateMapping } from 'mapping/dateMapping';
 
 import style from './style.module.css';
+import { Loader } from 'components/loader';
 
 export const ChosenStory = () => {
   const chosenStory = useAppSelector((state) => state.stories.chosenStory);
   const comments = useAppSelector((state) => state.comments);
+
+  let content = <></>;
+
+  if (chosenStory && chosenStory.kids && comments.isLoaded === 'LOADED') {
+    content = <CommentsContainer parentId={chosenStory.id} />;
+  } else if (comments.isLoaded === 'LOADING') {
+    content = <Loader page="storyPage" />;
+  }
 
   return (
     <>
@@ -39,9 +48,7 @@ export const ChosenStory = () => {
                   <strong>Комментарии: </strong> {chosenStory.kids?.length || 0}
                 </Typography>
 
-                {chosenStory.kids && comments.isLoaded === 'LOADED' && (
-                  <CommentsContainer parentId={chosenStory.id} />
-                )}
+                {content}
               </CardContent>
             </Card>
           </Container>

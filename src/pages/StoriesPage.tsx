@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { StoriesContainer } from 'containers/storiesContainer';
 import { Btn } from 'components/button';
+import { Loader } from 'components/loader';
 import { Container, Typography } from '@mui/material';
 
 import { axiosController, restartAxiosController } from 'services/hnAPI';
@@ -46,6 +47,12 @@ export const StoriesPage = () => {
     }
   }, [dispatch, storyIdsState.storyIds]);
 
+  let content = <Loader page="storiesPage" />;
+
+  if (storiesState.isLoaded === 'LOADED') {
+    content = <StoriesContainer />;
+  }
+
   return (
     <div className={style['page-container']}>
       <Container>
@@ -55,7 +62,7 @@ export const StoriesPage = () => {
 
         <Btn variant="outlined" content={btnContent} onClick={updateStories} />
 
-        {storiesState.isLoaded === 'LOADED' && <StoriesContainer />}
+        {content}
       </Container>
     </div>
   );
