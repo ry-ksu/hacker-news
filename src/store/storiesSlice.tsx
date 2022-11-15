@@ -40,7 +40,6 @@ const storiesSlice = createSlice({
       .addCase(fetchStories.fulfilled, (state, action) => {
         state.stories = action.payload;
         state.stories.filter((elem) => elem != null);
-        console.log('end fetch', state.stories);
         state.stories.sort((a, b) => b.time - a.time);
         state.isLoaded = 'LOADED';
       })

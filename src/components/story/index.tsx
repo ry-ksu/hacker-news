@@ -24,7 +24,6 @@ export const Story = (prop: IStoryProp) => {
     const storyIndex = Number(e.currentTarget.dataset.id);
     const index = stories.findIndex((el) => el.id === storyIndex);
     dispatch(addChosenStory(stories[index]));
-    console.log(111);
   };
 
   return prop.story && prop.story.url ? (

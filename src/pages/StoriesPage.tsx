@@ -27,7 +27,6 @@ export const StoriesPage = () => {
 
   useEffect(() => {
     dispatch(fetchStoryIds());
-    console.log(555);
 
     const interval = setInterval(() => {
       updateStories();
@@ -42,10 +41,8 @@ export const StoriesPage = () => {
   }, [dispatch, updateStories]);
 
   useEffect(() => {
-    console.log(999);
     if (storyIdsState.storyIds.length !== 0) {
       dispatch(fetchStories(storyIdsState.storyIds));
-      console.log(99955);
     }
   }, [dispatch, storyIdsState.storyIds]);
 

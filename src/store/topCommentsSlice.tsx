@@ -38,7 +38,6 @@ const commentsSlice = createSlice({
       .addCase(fetchTopComments.fulfilled, (state, action) => {
         state.isLoaded = 'LOADED';
         state.comments = [...state.comments, ...action.payload];
-        console.log('end comments', action.payload);
       })
       .addCase(fetchTopComments.rejected, (state) => {
         state.isLoaded = 'REJECTED';

@@ -15,7 +15,6 @@ export const fetchNestedComments = createAsyncThunk<IComment[], number[], { reje
     try {
       const fn = async (arr: number[]) => {
         await Promise.all(arr.map((id) => getStory(id))).then(async (data) => {
-          console.log('nested comments', data);
           result = [...result, ...data];
 
           await Promise.all(data.map(async (comment) => comment.kids && (await fn(comment.kids))));
@@ -48,7 +47,6 @@ const commentsSlice = createSlice({
       .addCase(fetchNestedComments.fulfilled, (state, action) => {
         state.isLoaded = 'LOADED';
         state.comments = [...state.comments, ...action.payload];
-        console.log('end nest comments', action.payload);
       })
       .addCase(fetchNestedComments.rejected, (state) => {
         state.isLoaded = 'REJECTED';
