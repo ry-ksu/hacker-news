@@ -54,13 +54,15 @@ export const StoriesPage = () => {
   }
 
   return (
-    <div className={style['page-container']}>
+    <div className={style['page-container']} data-testid="storiesPage/container">
       <Container>
-        <Typography variant="h2" gutterBottom>
+        <Typography data-testid="storiesPage/header" variant="h2" gutterBottom>
           Hacker News
         </Typography>
 
-        <Btn variant="outlined" content={btnContent} onClick={updateStories} />
+        <div data-testid="storiesPage/button">
+          <Btn variant="outlined" content={btnContent} onClick={updateStories} />
+        </div>
 
         {content}
       </Container>

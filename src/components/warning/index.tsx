@@ -5,7 +5,7 @@ import style from './style.module.css';
 
 export const Warning = ({ warning }: { warning: string }) => {
   return (
-    <div className={style['warning-wrapper']}>
+    <div data-testid="warning" className={style['warning-wrapper']}>
       <Card>
         <CardContent>
           <p>{warning}</p>

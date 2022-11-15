@@ -5,7 +5,7 @@ import style from './style.module.css';
 
 export const Footer = () => {
   return (
-    <div className={style.footer}>
+    <div data-testid="footer" className={style.footer}>
       <a href="https://github.com/ry-ksu">
         <div className={style['github-container']}>
           <GitHubIcon style={{ color: '#fff' }} />

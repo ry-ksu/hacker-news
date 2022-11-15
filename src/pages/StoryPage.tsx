@@ -47,13 +47,13 @@ export const StoryPage = () => {
   }
 
   return (
-    <div className={style['page-container']}>
+    <div className={style['page-container']} data-testid="storyPage/container">
       <Container>
-        <Typography variant="h2" gutterBottom>
+        <Typography data-testid="storyPage/header" variant="h2" gutterBottom>
           Страница новости
         </Typography>
 
-        <div className={style['story-page_buttons']}>
+        <div data-testid="storyPage/buttons" className={style['story-page_buttons']}>
           <NavLink to="/">
             <Btn variant="outlined" content={navLinkContent} onClick={() => {}} />
           </NavLink>

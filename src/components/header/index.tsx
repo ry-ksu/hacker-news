@@ -60,7 +60,7 @@ export const Header = () => {
   const drawerWidth = 240;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box data-testid="header" sx={{ display: 'flex' }}>
       <AppBar position="static">
         <Container>
           <Toolbar>
