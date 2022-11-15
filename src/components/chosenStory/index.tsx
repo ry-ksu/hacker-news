@@ -14,7 +14,7 @@ export const ChosenStory = () => {
   let content = <></>;
 
   if (chosenStory && chosenStory.kids && comments.isLoaded === 'LOADED') {
-    content = <CommentsContainer parentId={chosenStory.id} />;
+    content = <CommentsContainer commentsState={comments.comments} parentId={chosenStory.id} />;
   } else if (comments.isLoaded === 'LOADING') {
     content = <Loader page="storyPage" />;
   }

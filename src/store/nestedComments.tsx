@@ -2,18 +2,28 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { ICommentState, IComment } from 'types';
 import { getStory } from 'services/hnAPI';
 
-const commentsInitialState: ICommentState = {
+const nestedCommentsInitialState: ICommentState = {
   comments: [],
   isLoaded: 'NOT_LOADED',
   error: '',
 };
 
-export const fetchComments = createAsyncThunk<IComment[], number[], { rejectValue: string }>(
-  'comments/fetchComments',
+export const fetchNestedComments = createAsyncThunk<IComment[], number[], { rejectValue: string }>(
+  'nestedComments/fetchComments',
   async (array, { rejectWithValue }) => {
     let result: IComment[] = [];
     try {
-      await Promise.all(array.map((id) => getStory(id))).then((data) => (result = data));
+      const fn = async (arr: number[]) => {
+        await Promise.all(arr.map((id) => getStory(id))).then(async (data) => {
+          console.log('nested comments', data);
+          result = [...result, ...data];
+
+          await Promise.all(data.map(async (comment) => comment.kids && (await fn(comment.kids))));
+        });
+      };
+
+      await fn(array);
+
       return result;
     } catch (error) {
       return rejectWithValue('Failed to get list of news.');
@@ -22,8 +32,8 @@ export const fetchComments = createAsyncThunk<IComment[], number[], { rejectValu
 );
 
 const commentsSlice = createSlice({
-  name: 'comments',
-  initialState: commentsInitialState,
+  name: 'nestedComments',
+  initialState: nestedCommentsInitialState,
   reducers: {
     removeComments(state) {
       state.comments = [];
@@ -31,16 +41,16 @@ const commentsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchComments.pending, (state) => {
+      .addCase(fetchNestedComments.pending, (state) => {
         state.isLoaded = 'LOADING';
         state.error = '';
       })
-      .addCase(fetchComments.fulfilled, (state, action) => {
+      .addCase(fetchNestedComments.fulfilled, (state, action) => {
         state.isLoaded = 'LOADED';
         state.comments = [...state.comments, ...action.payload];
-        console.log('end comments', action.payload);
+        console.log('end nest comments', action.payload);
       })
-      .addCase(fetchComments.rejected, (state) => {
+      .addCase(fetchNestedComments.rejected, (state) => {
         state.isLoaded = 'REJECTED';
         state.error = 'Something was wrong. Failed to get list of comments.';
       });

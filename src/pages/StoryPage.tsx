@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
-import { fetchComments, removeComments } from 'store/storyCommentsSlice';
+import { fetchTopComments, removeComments } from 'store/topCommentsSlice';
 import { useAppDispatch, useAppSelector } from 'hook';
 import { axiosController, restartAxiosController } from 'services/hnAPI';
 import { Btn } from 'components/button';
@@ -22,13 +22,13 @@ export const StoryPage = () => {
       axiosController.abort();
       restartAxiosController();
       dispatch(removeComments());
-      dispatch(fetchComments(chosenStory.kids));
+      dispatch(fetchTopComments(chosenStory.kids));
     }
   }, [chosenStory, dispatch]);
 
   useEffect(() => {
     if (chosenStory && chosenStory.kids) {
-      dispatch(fetchComments(chosenStory.kids));
+      dispatch(fetchTopComments(chosenStory.kids));
     }
 
     return () => {

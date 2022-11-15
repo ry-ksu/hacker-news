@@ -1,17 +1,21 @@
 import React from 'react';
-import { useAppSelector } from 'hook';
 import { Comment } from 'components/comment';
 import { Container } from '@mui/material';
 
 import style from './style.module.css';
+import { IComment } from 'types';
 
-export const CommentsContainer = ({ parentId }: { parentId: number }) => {
-  const comments = useAppSelector((state) => state.comments);
-
+export const CommentsContainer = ({
+  parentId,
+  commentsState,
+}: {
+  parentId: number;
+  commentsState: IComment[];
+}) => {
   return (
     <div className={style['comments-wrapper']}>
       <Container>
-        {comments.comments.map((comment) => {
+        {commentsState.map((comment) => {
           return parentId && <Comment key={comment.id} parentId={parentId} comment={comment} />;
         })}
       </Container>

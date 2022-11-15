@@ -2,17 +2,21 @@ import React from 'react';
 import { IComment } from 'types';
 import { CommentsContainer } from 'containers/commentsContainer';
 import { useAppDispatch, useAppSelector } from 'hook';
-import { fetchComments } from 'store/storyCommentsSlice';
+import { fetchNestedComments } from 'store/nestedComments';
 import { Typography } from '@mui/material';
+import { axiosController, restartAxiosController } from 'services/hnAPI';
+
 import style from './style.module.css';
 
 export const Comment = ({ parentId, comment }: { parentId: number; comment: IComment }) => {
-  const comments = useAppSelector((state) => state.comments.comments);
+  const nestedComments = useAppSelector((state) => state.nestedComments.comments);
   const dispatch = useAppDispatch();
 
   const onClick = () => {
-    if (comment.kids && comments.findIndex((el) => el.parent === comment.id) === -1) {
-      dispatch(fetchComments(comment.kids));
+    axiosController.abort();
+    restartAxiosController();
+    if (comment.kids && nestedComments.findIndex((el) => el.parent === comment.id) === -1) {
+      dispatch(fetchNestedComments(comment.kids));
     }
   };
 
@@ -28,7 +32,7 @@ export const Comment = ({ parentId, comment }: { parentId: number; comment: ICom
             </Typography>
           </div>
 
-          <CommentsContainer parentId={comment.id} />
+          <CommentsContainer commentsState={nestedComments} parentId={comment.id} />
         </div>
       ) : null}
     </>
