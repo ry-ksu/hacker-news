@@ -35,7 +35,7 @@ const commentsSlice = createSlice({
   name: 'nestedComments',
   initialState: nestedCommentsInitialState,
   reducers: {
-    removeComments(state) {
+    removeNestedComments(state) {
       state.comments = [];
     },
   },
@@ -58,4 +58,4 @@ const commentsSlice = createSlice({
 });
 
 export default commentsSlice.reducer;
-export const { removeComments } = commentsSlice.actions;
+export const { removeNestedComments } = commentsSlice.actions;

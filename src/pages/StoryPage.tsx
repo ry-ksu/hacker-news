@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { fetchTopComments, removeComments } from 'store/topCommentsSlice';
+import { removeNestedComments } from 'store/nestedComments';
 import { useAppDispatch, useAppSelector } from 'hook';
 import { axiosController, restartAxiosController } from 'services/hnAPI';
 import { Btn } from 'components/button';
@@ -21,6 +22,7 @@ export const StoryPage = () => {
     if (chosenStory && chosenStory.kids) {
       axiosController.abort();
       restartAxiosController();
+      dispatch(removeNestedComments());
       dispatch(removeComments());
       dispatch(fetchTopComments(chosenStory.kids));
     }
