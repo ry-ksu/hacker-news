@@ -1,5 +1,7 @@
+// Library
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// Components
 import { NotFoundPage } from '../../pages/NotFoundPage';
 import { StoriesPage } from '../../pages/StoriesPage';
 import { StoryPage } from '../../pages/StoryPage';
@@ -11,7 +13,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/" component={StoriesPage} />
-          <Route path="/story" component={StoryPage} />
+          <Route exact path="/story" component={StoryPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Layout>

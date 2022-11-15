@@ -1,7 +1,6 @@
 import React from 'react';
 import { Comment } from 'components/comment';
 import { Container } from '@mui/material';
-
 import style from './style.module.css';
 import { IComment } from 'types';
 

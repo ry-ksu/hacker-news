@@ -1,15 +1,17 @@
+// Library
 import React, { useEffect, useCallback } from 'react';
+// Components
 import { StoriesContainer } from 'containers/storiesContainer';
 import { Btn } from 'components/button';
 import { Loader } from 'components/loader';
+// Style
 import { Container, Typography } from '@mui/material';
-
+import style from './style.module.css';
+// Other
 import { axiosController, restartAxiosController } from 'services/hnAPI';
 import { useAppDispatch, useAppSelector } from 'hook';
 import { fetchStoryIds, removeStoryIds } from 'store/storyIdsSlice';
 import { fetchStories } from '../store/storiesSlice';
-
-import style from './style.module.css';
 
 export const StoriesPage = () => {
   const storiesState = useAppSelector((state) => state.stories);

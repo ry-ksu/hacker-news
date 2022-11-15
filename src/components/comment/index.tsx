@@ -1,12 +1,15 @@
+// Library
 import React from 'react';
-import { IComment } from 'types';
+// Components
 import { CommentsContainer } from 'containers/commentsContainer';
+// Style
+import { Typography } from '@mui/material';
+import style from './style.module.css';
+// Other
 import { useAppDispatch, useAppSelector } from 'hook';
 import { fetchNestedComments } from 'store/nestedComments';
-import { Typography } from '@mui/material';
 import { axiosController, restartAxiosController } from 'services/hnAPI';
-
-import style from './style.module.css';
+import { IComment } from 'types';
 
 export const Comment = ({ parentId, comment }: { parentId: number; comment: IComment }) => {
   const nestedComments = useAppSelector((state) => state.nestedComments.comments);

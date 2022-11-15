@@ -1,11 +1,14 @@
+// Library
 import React from 'react';
-import { useAppSelector } from 'hook';
+// Components
 import { CommentsContainer } from 'containers/commentsContainer';
-import { Card, CardContent, Typography, Container } from '@mui/material';
-import { dateMapping } from 'mapping/dateMapping';
-
-import style from './style.module.css';
 import { Loader } from 'components/loader';
+// Style
+import { Card, CardContent, Typography, Container } from '@mui/material';
+import style from './style.module.css';
+// Other
+import { useAppSelector } from 'hook';
+import { dateMapping } from 'mapping/dateMapping';
 
 export const ChosenStory = () => {
   const chosenStory = useAppSelector((state) => state.stories.chosenStory);

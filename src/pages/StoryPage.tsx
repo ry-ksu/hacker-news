@@ -1,15 +1,18 @@
+// Library
 import React, { useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
+// Components
+import { ChosenStory } from 'components/chosenStory';
+import { Btn } from 'components/button';
+import { Warning } from 'components/warning';
+// Style
+import { Typography, Container } from '@mui/material';
+import style from './style.module.css';
+// Other
 import { fetchTopComments, removeComments } from 'store/topCommentsSlice';
 import { removeNestedComments } from 'store/nestedComments';
 import { useAppDispatch, useAppSelector } from 'hook';
 import { axiosController, restartAxiosController } from 'services/hnAPI';
-import { Btn } from 'components/button';
-import { ChosenStory } from 'components/chosenStory';
-import { Typography, Container } from '@mui/material';
-
-import style from './style.module.css';
-import { Warning } from 'components/warning';
 
 export const StoryPage = () => {
   const chosenStory = useAppSelector((state) => state.stories.chosenStory);

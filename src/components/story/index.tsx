@@ -1,14 +1,16 @@
+// Library
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { addChosenStory } from 'store/storiesSlice';
-import { useAppDispatch, useAppSelector } from 'hook';
-import { IStory } from 'types';
+// Style
 import { Card, CardContent, Typography, Badge } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ForumIcon from '@mui/icons-material/Forum';
-import { dateMapping } from 'mapping/dateMapping';
-
 import style from './style.module.css';
+// Other
+import { addChosenStory } from 'store/storiesSlice';
+import { useAppDispatch, useAppSelector } from 'hook';
+import { IStory } from 'types';
+import { dateMapping } from 'mapping/dateMapping';
 
 type IStoryProp = {
   story: IStory;
