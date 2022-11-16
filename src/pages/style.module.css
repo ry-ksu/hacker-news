@@ -1,0 +1,10 @@
+.page-container {
+  margin: 40px 0 50px;
+  min-height: calc(100vh - 214px);
+}
+
+.story-page_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}

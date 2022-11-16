@@ -1,0 +1,40 @@
+.card {
+  margin-bottom: 10px;
+}
+
+.card-content {
+  position: relative;
+}
+
+@media screen and (max-width: 648px) {
+  .card-content {
+    padding-bottom: 40px;
+  }
+}
+
+.card-content_by,
+.card-content_posted {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 7px;
+}
+
+.badge_rating,
+.badge_comment {
+  position: absolute;
+  bottom: 35px;
+}
+
+.badge_rating {
+  right: 70px;
+}
+
+.badge_comment {
+  right: 30px;
+}
+
+.icon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
