@@ -27,7 +27,7 @@ export const Comment = ({ parentId, comment }: { parentId: number; comment: ICom
     <>
       {comment.parent === parentId ? (
         <div className={style.comment} onClick={onClick}>
-          <div>{comment.text}</div>
+          <div dangerouslySetInnerHTML={{ __html: comment.text }}></div>
 
           <div className={style['comment__answer-wrapper']}>
             <Typography color="text.secondary">

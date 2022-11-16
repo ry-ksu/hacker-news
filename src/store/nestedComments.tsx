@@ -13,19 +13,19 @@ export const fetchNestedComments = createAsyncThunk<IComment[], number[], { reje
   async (array, { rejectWithValue }) => {
     let result: IComment[] = [];
     try {
-      const fn = async (arr: number[]) => {
+      const getNestedComments = async (arr: number[]) => {
         await Promise.all(arr.map((id) => getStory(id))).then(async (data) => {
           result = [...result, ...data];
 
-          await Promise.all(data.map(async (comment) => comment.kids && (await fn(comment.kids))));
+          await Promise.all(data.map((comment) => comment.kids && getNestedComments(comment.kids)));
         });
       };
 
-      await fn(array);
+      await getNestedComments(array);
 
       return result;
     } catch (error) {
-      return rejectWithValue('Failed to get list of news.');
+      return rejectWithValue('Failed to get list of nested comments.');
     }
   }
 );
@@ -46,11 +46,11 @@ const commentsSlice = createSlice({
       })
       .addCase(fetchNestedComments.fulfilled, (state, action) => {
         state.isLoaded = 'LOADED';
-        state.comments = [...state.comments, ...action.payload];
+        state.comments = [...state.comments, ...action.payload.filter((i) => i != null)];
       })
       .addCase(fetchNestedComments.rejected, (state) => {
         state.isLoaded = 'REJECTED';
-        state.error = 'Something was wrong. Failed to get list of comments.';
+        state.error = 'Something was wrong. Failed to get list of nested comments.';
       });
   },
 });

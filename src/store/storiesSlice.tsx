@@ -38,8 +38,7 @@ const storiesSlice = createSlice({
         state.error = '';
       })
       .addCase(fetchStories.fulfilled, (state, action) => {
-        state.stories = action.payload;
-        state.stories.filter((elem) => elem != null);
+        state.stories = action.payload.filter((i) => i != null);
         state.stories.sort((a, b) => b.time - a.time);
         state.isLoaded = 'LOADED';
       })

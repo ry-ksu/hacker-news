@@ -9,7 +9,7 @@ export const fetchStoryIds = createAsyncThunk<Array<number>, undefined, { reject
       const response = await getStoryIds();
       return response;
     } catch (error) {
-      return rejectWithValue('Failed to get list of news.');
+      return rejectWithValue('Failed to get id list of news.');
     }
   }
 );
@@ -37,13 +37,13 @@ const storyIdsSlice = createSlice({
       })
       .addCase(fetchStoryIds.fulfilled, (state, action) => {
         state.isLoaded = 'LOADED';
-        state.storyIds = action.payload;
+        state.storyIds = action.payload.filter((i) => i != null);
         const endValue = 100;
         state.storyIds = state.storyIds.slice(0, endValue);
       })
       .addCase(fetchStoryIds.rejected, (state) => {
         state.isLoaded = 'REJECTED';
-        state.error = 'Something was wrong. Failed to get list of news.';
+        state.error = 'Something was wrong. Failed to get id list of news.';
       });
   },
 });

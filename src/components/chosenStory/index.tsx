@@ -39,15 +39,15 @@ export const ChosenStory = () => {
                   </Typography>
                 </a>
 
-                <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                <Typography className={style.subtext} color="text.secondary">
                   <strong>Автор: </strong> {chosenStory.by}
                 </Typography>
 
-                <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                <Typography className={style.subtext} color="text.secondary">
                   <strong>Дата публикации: </strong> {dateMapping(chosenStory.time)}
                 </Typography>
 
-                <Typography sx={{ fontSize: 14 }} color="text.secondary">
+                <Typography className={style.subtext} color="text.secondary">
                   <strong>Комментарии: </strong> {chosenStory.kids?.length || 0}
                 </Typography>
 

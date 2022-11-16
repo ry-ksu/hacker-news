@@ -16,7 +16,7 @@ export const fetchTopComments = createAsyncThunk<IComment[], number[], { rejectV
       await Promise.all(array.map((id) => getStory(id))).then((data) => (result = data));
       return result;
     } catch (error) {
-      return rejectWithValue('Failed to get list of news.');
+      return rejectWithValue('Failed to get list of comments.');
     }
   }
 );
@@ -37,7 +37,7 @@ const commentsSlice = createSlice({
       })
       .addCase(fetchTopComments.fulfilled, (state, action) => {
         state.isLoaded = 'LOADED';
-        state.comments = [...state.comments, ...action.payload];
+        state.comments = [...state.comments, ...action.payload.filter((i) => i != null)];
       })
       .addCase(fetchTopComments.rejected, (state) => {
         state.isLoaded = 'REJECTED';

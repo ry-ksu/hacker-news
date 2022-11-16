@@ -49,6 +49,8 @@ export const StoryPage = () => {
     content = <ChosenStory />;
   }
 
+  setTimeout(() => window.scrollTo(0, 0), 0);
+
   return (
     <div className={style['page-container']} data-testid="storyPage/container">
       <Container>

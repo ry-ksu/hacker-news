@@ -2,16 +2,12 @@ import React from 'react';
 import { Header } from 'components/header';
 import { Footer } from 'components/footer';
 
-type ILayoutProps = {
-  children: JSX.Element;
-};
-
-export const Layout = (props: ILayoutProps) => {
+export const Layout = ({ children }: { children: JSX.Element }) => {
   return (
     <>
       <Header />
 
-      {props.children}
+      {children}
 
       <Footer />
     </>
