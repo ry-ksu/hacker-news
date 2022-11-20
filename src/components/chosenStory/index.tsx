@@ -11,7 +11,7 @@ import { useAppSelector } from 'hook';
 import { dateMapping } from 'mapping/dateMapping';
 
 export const ChosenStory = () => {
-  const chosenStory = useAppSelector((state) => state.stories.chosenStory);
+  const chosenStory = useAppSelector((state) => state.chosenStory.story);
   const comments = useAppSelector((state) => state.comments);
 
   let content = <></>;

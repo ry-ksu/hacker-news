@@ -9,31 +9,31 @@ import { Warning } from 'components/warning';
 import { Typography, Container } from '@mui/material';
 import style from './style.module.css';
 // Other
+import { fetchStory } from 'store/chosenStory';
 import { fetchTopComments, removeComments } from 'store/topCommentsSlice';
 import { removeNestedComments } from 'store/nestedComments';
 import { useAppDispatch, useAppSelector } from 'hook';
 import { axiosController, restartAxiosController } from 'services/hnAPI';
 
-export const StoryPage = () => {
-  const chosenStory = useAppSelector((state) => state.stories.chosenStory);
+type IMatch = {
+  isExact: boolean;
+  params: {
+    id: string;
+  };
+  path: string;
+  url: string;
+};
+
+export const StoryPage = ({ match }: { match?: IMatch }) => {
   const dispatch = useAppDispatch();
+  const chosenStory = useAppSelector((state) => state.chosenStory);
 
-  const btnContent = 'Обновить комментарии';
-  const navLinkContent = 'К главной странице';
-
-  const updateComments = useCallback(() => {
-    if (chosenStory && chosenStory.kids) {
-      axiosController.abort();
-      restartAxiosController();
-      dispatch(removeNestedComments());
-      dispatch(removeComments());
-      dispatch(fetchTopComments(chosenStory.kids));
-    }
-  }, [chosenStory, dispatch]);
+  let id: null | string = null;
+  if (match) id = match.params.id;
 
   useEffect(() => {
-    if (chosenStory && chosenStory.kids) {
-      dispatch(fetchTopComments(chosenStory.kids));
+    if (id) {
+      dispatch(fetchStory(Number(id)));
     }
 
     return () => {
@@ -41,6 +41,25 @@ export const StoryPage = () => {
       axiosController.abort();
       restartAxiosController();
     };
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (chosenStory.story && chosenStory.story.kids) {
+      dispatch(fetchTopComments(chosenStory.story.kids));
+    }
+  }, [chosenStory, dispatch]);
+
+  const btnContent = 'Обновить комментарии';
+  const navLinkContent = 'К главной странице';
+
+  const updateComments = useCallback(() => {
+    if (chosenStory.story && chosenStory.story.kids) {
+      axiosController.abort();
+      restartAxiosController();
+      dispatch(removeNestedComments());
+      dispatch(removeComments());
+      dispatch(fetchTopComments(chosenStory.story.kids));
+    }
   }, [chosenStory, dispatch]);
 
   let content = <Warning warning="Пожалуйста, перейдите на Главную страницу и выберете новость." />;

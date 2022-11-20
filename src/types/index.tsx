@@ -20,7 +20,6 @@ export type IStoriesState = {
   stories: IStory[];
   isLoaded: string;
   error: string;
-  chosenStory: IStory | null;
 };
 
 export type IComment = {

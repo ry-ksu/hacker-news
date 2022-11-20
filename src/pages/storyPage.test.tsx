@@ -24,19 +24,4 @@ describe('storiesPage tests', () => {
     expect(getByTestId('storyPage/header')).toBeInTheDocument();
     expect(getByTestId('storyPage/buttons')).toBeInTheDocument();
   });
-
-  // Рендерим компонент
-  // Проверяем, что дефолтное поведение работает
-  // (Пользователю предлагают перейти на главную страницу)
-  test('page has header', () => {
-    const { getByTestId, getByText } = render(
-      <Provider store={store}>
-        <StoryPage />
-      </Provider>,
-      { wrapper: BrowserRouter }
-    );
-
-    expect(getByTestId('warning')).toBeInTheDocument();
-    expect(getByText(/пожалуйста, перейдите на главную страницу/i)).toBeInTheDocument();
-  });
 });

@@ -6,7 +6,6 @@ const storiesInitialState: IStoriesState = {
   stories: [],
   isLoaded: 'NOT_LOADED',
   error: '',
-  chosenStory: null,
 };
 
 export const fetchStories = createAsyncThunk<IStory[], number[], { rejectValue: string }>(
@@ -25,11 +24,7 @@ export const fetchStories = createAsyncThunk<IStory[], number[], { rejectValue: 
 const storiesSlice = createSlice({
   name: 'stories',
   initialState: storiesInitialState,
-  reducers: {
-    addChosenStory(state, action) {
-      state.chosenStory = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchStories.pending, (state) => {
@@ -49,5 +44,4 @@ const storiesSlice = createSlice({
   },
 });
 
-export const { addChosenStory } = storiesSlice.actions;
 export default storiesSlice.reducer;
