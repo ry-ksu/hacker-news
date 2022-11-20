@@ -13,7 +13,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/" component={StoriesPage} />
-          <Route exact path="/story" component={StoryPage} />
+          <Route path="/story/:id" component={StoryPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Layout>

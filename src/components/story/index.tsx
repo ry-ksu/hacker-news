@@ -7,8 +7,6 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ForumIcon from '@mui/icons-material/Forum';
 import style from './style.module.css';
 // Other
-import { addChosenStory } from 'store/storiesSlice';
-import { useAppDispatch, useAppSelector } from 'hook';
 import { IStory } from 'types';
 import { dateMapping } from 'mapping/dateMapping';
 
@@ -17,19 +15,10 @@ type IStoryProp = {
 };
 
 export const Story = (prop: IStoryProp) => {
-  const dispatch = useAppDispatch();
-  const stories = useAppSelector((state) => state.stories.stories);
-
-  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const storyIndex = Number(e.currentTarget.dataset.id);
-    const index = stories.findIndex((el) => el.id === storyIndex);
-    dispatch(addChosenStory(stories[index]));
-  };
-
   return prop.story && prop.story.url ? (
     <div className={style.card}>
-      <Card data-id={prop.story.id} onClick={onClick}>
-        <NavLink to="/story">
+      <Card>
+        <NavLink to={`/story/${prop.story.id}`}>
           <div className={style['card-content']}>
             <CardContent>
               <Typography variant="h5" color="text.primary">
